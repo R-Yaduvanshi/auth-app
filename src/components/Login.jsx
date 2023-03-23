@@ -39,7 +39,11 @@ const Login = () => {
   const [state, setState] = useReducer(reducer, initialState);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
+  //   Getting data from authContext
   const auth = useContext(AuthContext);
+
+  //   Login Function
   const loginHandle = async () => {
     try {
       let res = await axios.post("https://bugappbackend1.onrender.com/login", {
@@ -47,8 +51,10 @@ const Login = () => {
         password: state.password,
       });
 
+      //   Here i'm calling login function with the token
       auth.login(res.data.jwtToken);
       alert("Login Successfull");
+      navigate("/users");
     } catch (err) {
       alert("Somethin went wrong");
     }
@@ -56,7 +62,6 @@ const Login = () => {
 
   return (
     <div>
-      (
       <Flex
         minH={"100vh"}
         align={"center"}
@@ -130,7 +135,7 @@ const Login = () => {
               <Stack pt={6}>
                 <Text align={"center"}>
                   Have not a account?{" "}
-                  <RouterLink to="/signup" color={"blue.400"}>
+                  <RouterLink to="/" color={"blue.400"}>
                     Signup
                   </RouterLink>
                 </Text>

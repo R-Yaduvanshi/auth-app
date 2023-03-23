@@ -16,7 +16,9 @@ const AuthContextProvider = ({ children }) => {
   };
   const logout = async () => {
     try {
-      let res = axios.get("https://bugappbackend1.onrender.com/logout");
+      let res = await axios.get("https://bugappbackend1.onrender.com/logout");
+      console.log(res);
+      setIsAuthenticated(false);
       navigate("/login");
     } catch (err) {
       console.log(err);
